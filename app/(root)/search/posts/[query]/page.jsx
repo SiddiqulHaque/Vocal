@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useUser } from "@clerk/nextjs";
 import Loader from "@components/Loader";
@@ -31,7 +31,7 @@ const SearchPost = () => {
     <Loader />
   ) : (
     <div className="flex flex-col gap-10">
-      <div className="flex gap-6">
+      <div className="flex gap-6 lg:hidden">
         <Link className="tab bg-purple-1" href={`/search/posts/${query}`}>
           Posts
         </Link>
@@ -41,7 +41,13 @@ const SearchPost = () => {
       </div>
 
       {searchedPosts.map((post) => (
-        <PostCard key={post._id} post={post} creator={post.creator} loggedInUser={user} update={getSearchedPosts}/>
+        <PostCard
+          key={post._id}
+          post={post}
+          creator={post.creator}
+          loggedInUser={user}
+          update={getSearchedPosts}
+        />
       ))}
     </div>
   );

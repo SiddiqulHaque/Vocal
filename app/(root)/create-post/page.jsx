@@ -25,18 +25,12 @@ const CreatePost = () => {
     }
   }, [user]);
 
-  const postData = {
-    creatorId: userData?._id,
-    caption: "",
-    tag: "",
-    postPhoto: null,
-  };
 
   return loading || !isLoaded ? (
     <Loader />
   ) : (
     <div className="pt-6">
-      <Posting post={postData} apiEndpoint={"/api/post/new"} />
+      <Posting user={userData._id} apiEndpoint={"/api/post/new"} />
     </div>
   );
 };

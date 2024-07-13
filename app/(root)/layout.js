@@ -8,8 +8,8 @@ import RightSideBar from "@components/layout/RightSideBar";
 import BottomBar from "@components/layout/BottomBar";
 
 export const metadata = {
-  title: "Vibe Zone",
-  description: "Next 14 Social Media App",
+  title: "Vocal",
+  description: "Social Media App",
 };
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,11 +19,9 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} bg-purple-2 text-light-1`}>
-          <main className="flex flex-row">
+          <main className="flex flex-row flex-[20%_60%_20%]">
             <LeftSideBar />
-            <MainContainer>
-              {children}
-            </MainContainer>
+            <MainContainer>{children}</MainContainer>
             <RightSideBar />
           </main>
           <BottomBar />

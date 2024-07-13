@@ -35,12 +35,12 @@ const TopBar = () => {
   return !isLoaded || loading ? (
     <Loader />
   ) : (
-    <div className="flex justify-between items-center mt-6">
-      <div className="relative">
+    <div className="flex justify-between items-center mt-6 w-full lg:justify-end">
+      <div className="relative lg:hidden  ">
         <input
           type="text"
           className="search-bar"
-          placeholder="Search posts, people, ..."
+          placeholder="Search posts"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -62,7 +62,10 @@ const TopBar = () => {
           <Person sx={{ fontSize: "35px", color: "white" }} />
         </Link>
 
-        <UserButton appearance={{ baseTheme: dark }} afterSignOutUrl="/sign-in" />
+        <UserButton
+          appearance={{ baseTheme: dark }}
+          afterSignOutUrl="/sign-in"
+        />
       </div>
     </div>
   );

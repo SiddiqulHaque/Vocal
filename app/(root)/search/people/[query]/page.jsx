@@ -29,7 +29,7 @@ const SearchPeople = () => {
     <Loader />
   ) : (
     <div className="flex flex-col gap-10">
-      <div className="flex gap-6">
+      <div className="flex gap-6 lg:hidden">
         <Link className="tab bg-dark-2" href={`/search/posts/${query}`}>
           Posts
         </Link>

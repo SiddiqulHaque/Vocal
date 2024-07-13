@@ -1,24 +1,62 @@
-import Image from "next/image";
-import React from "react";
-
+"use client";
+import React, { useEffect, useState } from "react";
+import { Search } from "@mui/icons-material";
+import UserCard from "@components/cards/UserCard";
+import axios from "axios";
 const RightSideBar = () => {
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [searchedPeople, setSearchedPeople] = useState([]);
+
+  const getSearchedPeople = async () => {
+    const response = await fetch(`/api/user/search/${search}`);
+    const data = await response.json();
+    setSearchedPeople(data);
+    setLoading(false);
+  };
+  const getinitialPeople = async () => {
+    try {
+      await axios.get("/api/people").then((res) => {
+        console.log(res.data);
+        setSearchedPeople(res.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getinitialPeople();
+  }, []);
+  useEffect(() => {
+    if (search.length == 0) {
+      getinitialPeople();
+    }
+
+    getSearchedPeople();
+  }, [search]);
   return (
-    <div className="sticky right-0 top-0 z-20 h-screen w-[300px] xl:w-[350px] flex flex-col gap-12 overflow-auto pl-6 pr-10 py-6 max-lg:hidden">
+    <div className="sticky right-0 top-0 z-20 h-screen w-[300px] xl:w-[350px] flex flex-col gap-12 overflow-auto pl-6 pr-10 py-6 max-lg:hidden custom-scrollbar">
       <div className="flex flex-col gap-4">
-        <h3 className="text-light-1 text-heading3-bold">Sponsored</h3>
-        <Image
-          src="/assets/ad.jpg"
-          alt="ad"
-          width={280}
-          height={200}
-          className="rounded-lg"
-        />
-        <p className="text-body-bold text-light-1">Febreze Air Freshener</p>
-        <p className="text-small-semibold text-light-2">
-          Instant odor fighting and a burst of freshness. Amazing summer scent.
-          It is so light and fruity and if you are a scent person it has major
-          happy vibes.
-        </p>
+        <div className="relative">
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search People"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <Search className="search-icon" onClick={() => getSearchedPeople()} />
+        </div>
+        <div className="font-bold    ">
+          <h1 className="">Suggested People</h1>
+        </div>
+        {searchedPeople?.map((person) => (
+          <UserCard
+            key={person._id}
+            userData={person}
+            update={getSearchedPeople}
+          />
+        ))}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import Link from "next/link";
 import Menu from "./Menu";
 import { useEffect, useState } from "react";
 import Loader from "@components/Loader";
+import logo from "../../public/assets/Logo.png";
 
 const LeftSideBar = () => {
   const { user, isLoaded } = useUser();
@@ -31,14 +32,15 @@ const LeftSideBar = () => {
   return loading || !isLoaded ? (
     <Loader />
   ) : (
-    <div className="h-screen left-0 top-0 sticky overflow-auto px-10 py-6 flex flex-col gap-6 max-md:hidden 2xl:w-[350px] pr-20 custom-scrollbar">
-      <Link href="/">
-        Vocal 
+    <div className="h-screen left-0 top-0 sticky overflow-auto px-10 py-6 flex flex-col gap-2 max-md:hidden 2xl:w-[350px] pr-20 custom-scrollbar">
+      <Link href="/" className="flex justify-center items-center gap-4">
+        <Image src={logo} width={50} height={50} />
+        <h1 className=" font-bold font-serif text-[30px] text-gray-300 ">VOCAL</h1>
       </Link>
 
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-2 items-center text-light-1">
-          <Link href={`/profile/${userData._id}/posts`}>
+          <Link href={`/profile/${userData?._id}/posts`}>
             <Image
               src={userData?.profilePhoto}
               alt="profile photo"
@@ -74,7 +76,10 @@ const LeftSideBar = () => {
       <hr />
 
       <div className="flex gap-4 items-center">
-        <UserButton appearance={{ baseTheme: dark }} afterSignOutUrl="/sign-in"/>
+        <UserButton
+          appearance={{ baseTheme: dark }}
+          afterSignOutUrl="/sign-in"
+        />
         <p className="text-light-1 text-body-bold">Manage Account</p>
       </div>
     </div>
