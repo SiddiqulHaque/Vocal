@@ -31,7 +31,6 @@ const RightSideBar = () => {
     if (search.length == 0) {
       getinitialPeople();
     }
-
     getSearchedPeople();
   }, [search]);
   return (
@@ -52,7 +51,7 @@ const RightSideBar = () => {
         </div>
         {searchedPeople?.map((person) => (
           <UserCard
-            key={person._id}
+            key={person.id}
             userData={person}
             update={getSearchedPeople}
           />
