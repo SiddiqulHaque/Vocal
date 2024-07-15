@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import { toast } from "sonner";
 
 const Posting = ({ user, apiEndpoint }) => {
   const [auctionImage, setAuctionImage] = useState(null);
@@ -47,6 +48,18 @@ const Posting = ({ user, apiEndpoint }) => {
     }
   };
   const handlePublish = async () => {
+    if (file == null) {
+      toast.error("Please upload Image");
+      return;
+    }
+    if (caption.length == 0) {
+      toast.error("Please give some caption");
+      return;
+    }
+    if (tags.length == 0) {
+      toast.error("Please enter some tags");
+      return;
+    }
     try {
       axios
         .post(apiEndpoint, { user, caption, tags, auctionImage })
@@ -59,6 +72,18 @@ const Posting = ({ user, apiEndpoint }) => {
     }
   };
   const handleUpdate = async () => {
+    if (file == null) {
+      toast.error("Please upload Image");
+      return;
+    }
+    if (caption.length == 0) {
+      toast.error("Please give some caption");
+      return;
+    }
+    if (tags.length == 0) {
+      toast.error("Please enter some tags");
+      return;
+    }
     try {
       axios.post(apiEndpoint, { caption, tags, auctionImage }).then((res) => {
         console.log(res.data);

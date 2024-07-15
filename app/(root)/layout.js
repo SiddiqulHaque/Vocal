@@ -6,6 +6,7 @@ import LeftSideBar from "@components/layout/LeftSideBar";
 import MainContainer from "@components/layout/MainContainer";
 import RightSideBar from "@components/layout/RightSideBar";
 import BottomBar from "@components/layout/BottomBar";
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: "Vocal",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} bg-purple-2 text-light-1`}>
+          <Toaster  richColors />
           <main className="flex flex-row flex-[20%_60%_20%]">
             <LeftSideBar />
             <MainContainer>{children}</MainContainer>
