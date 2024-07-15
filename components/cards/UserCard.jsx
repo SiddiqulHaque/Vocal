@@ -51,9 +51,7 @@ const UserCard = ({ userData, update }) => {
     update();
   };
 
-  return loading || !isLoaded ? (
-    <Loader />
-  ) : (
+  return  (
     <div className="flex justify-between items-center">
       <Link className="flex gap-4 items-center" href={`/profile/${userData._id}/posts`}>
         <Image
@@ -73,7 +71,7 @@ const UserCard = ({ userData, update }) => {
         </div>
       </Link>
 
-      {user.id !== userData.clerkId &&
+      {user?.id !== userData?.clerkId &&
         (isFollowing ? (
           <PersonRemove
             sx={{ color: "#7857FF", cursor: "pointer" }}

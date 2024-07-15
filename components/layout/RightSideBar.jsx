@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Search } from "@mui/icons-material";
 import UserCard from "@components/cards/UserCard";
 import axios from "axios";
+import Loader from "@components/Loader";
 const RightSideBar = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -33,7 +34,9 @@ const RightSideBar = () => {
     }
     getSearchedPeople();
   }, [search]);
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div className="sticky right-0 top-0 z-20 h-screen w-[300px] xl:w-[350px] flex flex-col gap-12 overflow-auto pl-6 pr-10 py-6 max-lg:hidden custom-scrollbar">
       <div className="flex flex-col gap-4">
         <div className="relative">
@@ -50,11 +53,14 @@ const RightSideBar = () => {
           <h1 className="">Suggested People</h1>
         </div>
         {searchedPeople?.map((person) => (
-          <UserCard
-            key={person.id}
-            userData={person}
-            update={getSearchedPeople}
-          />
+          <>
+            <UserCard
+              key={person.id}
+              userData={person}
+              update={getSearchedPeople}
+            />
+            <p>user</p>
+          </>
         ))}
       </div>
     </div>
